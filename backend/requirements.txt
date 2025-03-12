@@ -1,0 +1,12 @@
+# Backend Dependencies
+numpy==1.24.3
+pandas==2.0.1
+scikit-learn==1.2.2
+fastapi==0.95.1
+uvicorn==0.22.0
+python-multipart==0.0.6
+pydantic==1.10.7
+scipy==1.10.1
+
+# Optional: For data visualization and additional analysis
+matplotlib==3.7.1
