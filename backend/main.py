@@ -4,11 +4,11 @@ import pickle
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 
-# Load the encoders and model
-with open("backend//encoders.pkl", "rb") as f:
+# Load the encoders and model from separate files
+with open("E:\\zproject\\chrun\\chrunnew\\customer-churn-prediction\\backend\\encoders.pkl", "rb") as f:
     encoders = pickle.load(f)
 
-with open("backend//customer_churn_model.pkl", "rb") as f:
+with open("E:\\zproject\\chrun\\chrunnew\\customer-churn-prediction\\backend\\customer_churn_model.pkl", "rb") as f:
     model_data = pickle.load(f)
     model = model_data["model"]
     feature_names = model_data["features_names"]
@@ -43,7 +43,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # Allow requests from React app
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
 
@@ -57,7 +57,8 @@ def predict_churn(data: CustomerData):
 
         # Encode categorical features using the loaded encoders
         for column, encoder in encoders.items():
-            input_df[column] = encoder.transform(input_df[column])
+            if column in input_df.columns:  # Ensure the column exists in the input data
+                input_df[column] = encoder.transform(input_df[column])
 
         # Ensure the columns are in the correct order
         input_df = input_df[feature_names]
