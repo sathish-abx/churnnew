@@ -1,12 +1,13 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
-# import missingno as msno
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import requests
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -60,22 +61,17 @@ def generate_plots(df):
     st.plotly_chart(fig1)
 
     # Churn Distribution w.r.t Gender
-    # Calculate dynamic values for Churn and Gender distribution
     churn_counts = df['Churn'].value_counts()
     gender_counts = df.groupby(['Churn', 'gender']).size().unstack()
 
-    # Values for the outer pie chart (Churn: Yes, Churn: No)
     values = [churn_counts.get('Yes', 0), churn_counts.get('No', 0)]
-
-    # Values for the inner pie chart (Female/Male for Churn: Yes and Churn: No)
     sizes_gender = [
-       gender_counts.loc['Yes', 'Female'] if 'Yes' in gender_counts.index and 'Female' in gender_counts.columns else 0,  # Females who churned
-       gender_counts.loc['Yes', 'Male'] if 'Yes' in gender_counts.index and 'Male' in gender_counts.columns else 0,    # Males who churned
-       gender_counts.loc['No', 'Female'] if 'No' in gender_counts.index and 'Female' in gender_counts.columns else 0,  # Females who did not churn
-      gender_counts.loc['No', 'Male'] if 'No' in gender_counts.index and 'Male' in gender_counts.columns else 0       # Males who did not churn
+       gender_counts.loc['Yes', 'Female'] if 'Yes' in gender_counts.index and 'Female' in gender_counts.columns else 0,
+       gender_counts.loc['Yes', 'Male'] if 'Yes' in gender_counts.index and 'Male' in gender_counts.columns else 0,
+       gender_counts.loc['No', 'Female'] if 'No' in gender_counts.index and 'Female' in gender_counts.columns else 0,
+       gender_counts.loc['No', 'Male'] if 'No' in gender_counts.index and 'Male' in gender_counts.columns else 0
     ]
 
-     # Plot the dynamic pie chart
     plt.figure(figsize=(6, 6))
     labels = ["Churn: Yes", "Churn: No"]
     labels_gender = ["F", "M", "F", "M"]
@@ -85,29 +81,22 @@ def generate_plots(df):
     explode_gender = (0.1, 0.1, 0.1, 0.1)
     textprops = {"fontsize": 15}
 
-    # Outer pie chart (Churn distribution)
     plt.pie(values, labels=labels, autopct='%1.1f%%', pctdistance=1.08, labeldistance=0.8,
         colors=colors, startangle=90, frame=True, explode=explode, radius=10,
         textprops=textprops, counterclock=True)
 
-    # Inner pie chart (Gender distribution within Churn)
     plt.pie(sizes_gender, labels=labels_gender, colors=colors_gender, startangle=90,
         explode=explode_gender, radius=7, textprops=textprops, counterclock=True)
 
-    # Draw circle in the center
     centre_circle = plt.Circle((0, 0), 5, color='black', fc='white', linewidth=0)
     fig = plt.gcf()
     fig.gca().add_artist(centre_circle)
 
-    # Add title
     plt.title('Churn Distribution w.r.t Gender: Male(M), Female(F)', fontsize=15, y=1.1)
-
-    # Show plot
     plt.axis('equal')
     plt.tight_layout()
     st.pyplot(plt.gcf())
    
-
     # Customer contract distribution
     fig3 = px.histogram(df, x="Churn", color="Contract", barmode="group", title="<b>Customer contract distribution<b>")
     fig3.update_layout(width=700, height=500, bargap=0.1)
@@ -174,26 +163,35 @@ def generate_plots(df):
     fig13.update_layout(width=700, height=500, bargap=0.1)
     st.plotly_chart(fig13)
 
-    # Distribution of monthly charges by churn
-    # sns.set_context("paper",font_scale=1.1)
-    # ax = sns.kdeplot(df.MonthlyCharges[(df["Churn"] == 'No') ], color="Red", shade = True)
-    # ax = sns.kdeplot(df.MonthlyCharges[(df["Churn"] == 'Yes') ], ax =ax, color="Blue", shade= True)
-    # ax.legend(["Not Churn","Churn"],loc='upper right')
-    # ax.set_ylabel('Density')
-    # ax.set_xlabel('Monthly Charges')
-    # ax.set_title('Distribution of monthly charges by churn')
-    # st.pyplot(plt.gcf())
-
 # Streamlit app
 st.title("Customer Churn Analysis")
 
-# File upload
-uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
+col1,col1,col3 = st.columns([.1,5,10])
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+with col1:
+    
+    # Year selection
+    years = [2020, 2021, 2022, 2023, 2024]
+    selected_year = st.selectbox("Select Year", years, index=years.index(2023), format_func=lambda x: f"{x} (Not Available)" if x < 2023 else str(x))
+
+    # Disable the select box for years before 2023
+    if selected_year < 2023:
+        st.warning("Please select a year from 2023 or 2024 to proceed.")
+    else:
+        # Quarter selection
+        quarters = [f"{selected_year}Quarter{i}" for i in range(1, 5)]
+        selected_quarter = st.selectbox("Select Quarter", quarters)
+
+        # Fetch data from the specified URL
+        url = f"http://localhost:8084/data/{selected_quarter}"
+        response = requests.get(url)
+    
+if response.status_code == 200:
+    data = response.json()
+    df = pd.DataFrame(data)
     st.write("Data Preview:")
     st.write(df.head())
     generate_plots(df)
 else:
-    st.write("Please upload a CSV file to proceed.")
+    st.write("Failed to fetch data. Please check the URL and try again.")
+        

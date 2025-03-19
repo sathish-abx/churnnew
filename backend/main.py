@@ -5,10 +5,10 @@ import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 
 # Load the encoders and model from separate files
-with open("E:\\zproject\\chrun\\chrunnew\\customer-churn-prediction\\backend\\encoders.pkl", "rb") as f:
+with open("encoders.pkl", "rb") as f:
     encoders = pickle.load(f)
 
-with open("E:\\zproject\\chrun\\chrunnew\\customer-churn-prediction\\backend\\customer_churn_model.pkl", "rb") as f:
+with open("customer_churn_model.pkl", "rb") as f:
     model_data = pickle.load(f)
     model = model_data["model"]
     feature_names = model_data["features_names"]

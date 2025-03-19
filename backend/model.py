@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 import pickle
 
 # Load the dataset
-df = pd.read_csv("E:\\zproject\\chrun\\chrunnew\\customer-churn-prediction\\backend\\dataset.csv")
+df = pd.read_csv("dataset.csv")
 
 # Drop customerID column as it is not required for modelling
 df = df.drop(columns=["customerID"])

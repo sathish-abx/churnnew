@@ -4,6 +4,7 @@ import React, { useState } from "react"; // Keep this import
 import axios from "axios";
 import "./App.css";
 
+
 function App() {
   const [formData, setFormData] = useState({
     gender: "Female",
@@ -61,22 +62,25 @@ function App() {
   return (
     <div className="app">
       <h1 className="heading1">Customer Churn Prediction</h1>
-      
-      <form className="form_length"onSubmit={handleSubmit}>
+
+      <form className="form_length" onSubmit={handleSubmit}>
         {/* Demographics Section */}
         <div className="form-section">
           <h2 className="section-title">Customer Demographics</h2>
           <div className="row">
-            <label>
+            <label className="labels1">
               Gender
-              <select name="gender" value={formData.gender} onChange={handleChange}>
+              <select className="selectbox1"
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}>
                 <option value="Female">Female</option>
                 <option value="Male">Male</option>
               </select>
             </label>
             <label>
               Senior Citizen
-              <select
+              <select className="selectbox1"
                 name="SeniorCitizen"
                 value={formData.SeniorCitizen}
                 onChange={handleChange}
@@ -87,21 +91,21 @@ function App() {
             </label>
             <label>
               Partner
-              <select name="Partner" value={formData.Partner} onChange={handleChange}>
+              <select className="selectbox1" name="Partner" value={formData.Partner} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
             </label>
             <label>
               Dependents
-              <select name="Dependents" value={formData.Dependents} onChange={handleChange}>
+              <select className="selectbox1" name="Dependents" value={formData.Dependents} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
             </label>
             <label>
               Tenure (months)
-              <input
+              <input className="selectbox1"
                 type="number"
                 name="tenure"
                 value={formData.tenure}
@@ -119,14 +123,14 @@ function App() {
           <div className="row">
             <label>
               Phone Service
-              <select name="PhoneService" value={formData.PhoneService} onChange={handleChange}>
+              <select className="selectbox1" name="PhoneService" value={formData.PhoneService} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
             </label>
             <label>
               Multiple Lines
-              <select name="MultipleLines" value={formData.MultipleLines} onChange={handleChange}>
+              <select className="selectbox1" name="MultipleLines" value={formData.MultipleLines} onChange={handleChange}>
                 <option value="No phone service">No phone service</option>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
@@ -134,14 +138,14 @@ function App() {
             </label>
           </div>
         </div>
-        
+
         {/* Internet Services Section */}
         <div className="form-section">
           <h2 className="section-title">Internet Services</h2>
           <div className="row">
             <label>
               Internet Service
-              <select name="InternetService" value={formData.InternetService} onChange={handleChange}>
+              <select className="selectbox1" name="InternetService" value={formData.InternetService} onChange={handleChange}>
                 <option value="DSL">DSL</option>
                 <option value="Fiber optic">Fiber optic</option>
                 <option value="No">No</option>
@@ -149,7 +153,7 @@ function App() {
             </label>
             <label>
               Online Security
-              <select name="OnlineSecurity" value={formData.OnlineSecurity} onChange={handleChange}>
+              <select className="selectbox1" name="OnlineSecurity" value={formData.OnlineSecurity} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -157,7 +161,7 @@ function App() {
             </label>
             <label>
               Online Backup
-              <select name="OnlineBackup" value={formData.OnlineBackup} onChange={handleChange}>
+              <select className="selectbox1" name="OnlineBackup" value={formData.OnlineBackup} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -168,7 +172,7 @@ function App() {
           <div className="row">
             <label>
               Device Protection
-              <select name="DeviceProtection" value={formData.DeviceProtection} onChange={handleChange}>
+              <select className="selectbox1" name="DeviceProtection" value={formData.DeviceProtection} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -176,7 +180,7 @@ function App() {
             </label>
             <label>
               Tech Support
-              <select name="TechSupport" value={formData.TechSupport} onChange={handleChange}>
+              <select className="selectbox1" name="TechSupport" value={formData.TechSupport} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -184,7 +188,7 @@ function App() {
             </label>
             <label>
               Streaming TV
-              <select name="StreamingTV" value={formData.StreamingTV} onChange={handleChange}>
+              <select className="selectbox1" name="StreamingTV" value={formData.StreamingTV} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -192,7 +196,7 @@ function App() {
             </label>
             <label>
               Streaming Movies
-              <select name="StreamingMovies" value={formData.StreamingMovies} onChange={handleChange}>
+              <select className="selectbox1" name="StreamingMovies" value={formData.StreamingMovies} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -207,7 +211,7 @@ function App() {
           <div className="row">
             <label>
               Contract
-              <select name="Contract" value={formData.Contract} onChange={handleChange}>
+              <select className="selectbox1" name="Contract" value={formData.Contract} onChange={handleChange}>
                 <option value="Month-to-month">Month-to-month</option>
                 <option value="One year">One year</option>
                 <option value="Two year">Two year</option>
@@ -215,14 +219,14 @@ function App() {
             </label>
             <label>
               Paperless Billing
-              <select name="PaperlessBilling" value={formData.PaperlessBilling} onChange={handleChange}>
+              <select className="selectbox1" name="PaperlessBilling" value={formData.PaperlessBilling} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
             </label>
             <label>
               Payment Method
-              <select name="PaymentMethod" value={formData.PaymentMethod} onChange={handleChange}>
+              <select className="selectbox1" name="PaymentMethod" value={formData.PaymentMethod} onChange={handleChange}>
                 <option value="Electronic check">Electronic check</option>
                 <option value="Mailed check">Mailed check</option>
                 <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
@@ -237,27 +241,27 @@ function App() {
           <h2 className="section-title">Financial Information</h2>
           <div className="row">
             <label>
-              Monthly Charges ($)
-              <input
+              Monthly Charges (₹)
+              <input className="selectbox1"
                 type="number"
                 name="MonthlyCharges"
                 value={formData.MonthlyCharges}
                 onChange={handleChange}
-                min="1"
+                min="100"
                 max="10000"
-                step="0.01"
+                step="10"
               />
             </label>
             <label>
-              Total Charges ($)
-              <input
+              Total Charges (₹)
+              <input className="selectbox1"
                 type="number"
                 name="TotalCharges"
                 value={formData.TotalCharges}
                 onChange={handleChange}
-                min="1"
+                min="1000"
                 max="100000"
-                step="0.01"
+                step="100"
               />
             </label>
           </div>
@@ -271,13 +275,13 @@ function App() {
       {prediction && (
         <div className="result">
           <h2>Prediction Result</h2>
-          
+
 
           <div className="metrics">
             <div className="metric-card">
-               <div className="metric-label">Prediction</div>
+              <div className="metric-label">Prediction</div>
               <div className="metric-value">{prediction.result}</div>
-             
+
             </div>
             {/* <div className="metric-card">
               <div className="metric-value">{formData.tenure} months</div>
@@ -285,12 +289,13 @@ function App() {
             </div> */}
             <div className="metric-card">
               <div className="metric-label">Chance of churn</div>
-              <div className="metric-value">{prediction.churn_probability}%</div>              
+              <div className="metric-value">{prediction.churn_probability}%</div>
             </div>
             <div className="metric-card">
-              <div className="metric-value">${formData.MonthlyCharges}</div>
+              <div className="metric-value">₹{formData.MonthlyCharges}</div>
               <div className="metric-label">Monthly Charges</div>
             </div>
+
           </div>
         </div>
       )}
