@@ -23,4 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-E:\older_version\churnnew\java\customer-churn\src\main\resources\firebase-service-account.json
+backend/firebase/firebase-service-account.json
+java/customer-churn/src/main/resources/firebase-service-account.json
+firebase-service-account.json

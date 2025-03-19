@@ -15,4 +15,10 @@ run CustomerChurnApplication.java // check sever at http://localhost:8084/data/2
 
 Step4
 in cmd3
-run
+cd graph
+streamlit run graph_app.py
+
+will run http://localhost:8501/
+or http://localhost:850x/
+
+
