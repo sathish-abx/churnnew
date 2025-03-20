@@ -189,9 +189,11 @@ with col1:
 if response.status_code == 200:
     data = response.json()
     df = pd.DataFrame(data)
+    
     st.write("Data Preview:")
     st.write(df.head())
     generate_plots(df)
+    st.link_button("Churn Prediction", "http://localhost:3000/")
 else:
     st.write("Failed to fetch data. Please check the URL and try again.")
         

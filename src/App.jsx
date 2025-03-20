@@ -103,7 +103,7 @@ function App() {
                 <option value="Yes">Yes</option>
               </select>
             </label>
-            <label>
+            <label className="label2">
               Tenure (months)
               <input className="selectbox1"
                 type="number"
@@ -266,11 +266,21 @@ function App() {
             </label>
           </div>
         </div>
+        <div className="btitems">
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Processing..." : "Predict"}
+          </button>
+          <div className="linkbtn">
+            <button type="button" className="buttonx">
+              <a href="http://localhost:8040/" target="_blank" rel="noopener noreferrer">
+                Churn Analysis
+              </a>
+            </button>
+          </div>
+        </div>
 
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Processing..." : "Predict"}
-        </button>
       </form>
+
 
       {prediction && (
         <div className="result">
