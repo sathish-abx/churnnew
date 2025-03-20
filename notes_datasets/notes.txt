@@ -11,6 +11,7 @@ npm start // to run npm/react page
 
 Step3
 open eclipse java college workspace
+file->import existing project-> browse the project in java/custumer-chrun
 run CustomerChurnApplication.java // check sever at http://localhost:8084/data/2023Quarter4
 
 Step4
