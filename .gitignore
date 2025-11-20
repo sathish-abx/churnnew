@@ -1,3 +1,7 @@
+firebase-service-account.json
+__pycache__/
+venv/
+
 # Logs
 logs
 *.log
@@ -23,6 +27,39 @@ dist-ssr
 *.sln
 *.sw?
 
-backend/firebase/firebase-service-account.json
-java/customer-churn/src/main/resources/firebase-service-account.json
-firebase-service-account.json
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+
+
