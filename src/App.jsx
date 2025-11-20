@@ -3,6 +3,7 @@
 import React, { useState } from "react"; // Keep this import
 import axios from "axios";
 import "./App.css";
+import logo from "./assets/logo.svg";
 
 
 function App() {
@@ -61,8 +62,8 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="heading1">Customer Churn Prediction</h1>
-
+      <img src={logo} alt="Unicorn Telecom Logo" className="logo" />
+      <h1 className="h1">Unicorn Telecom</h1>
       <form className="form_length" onSubmit={handleSubmit}>
         {/* Demographics Section */}
         <div className="form-section">
@@ -145,7 +146,7 @@ function App() {
           <div className="row">
             <label>
               Internet Service
-              <select className="selectbox1" name="InternetService" value={formData.InternetService} onChange={handleChange}>
+              <select className="selectbox2" name="InternetService" value={formData.InternetService} onChange={handleChange}>
                 <option value="DSL">DSL</option>
                 <option value="Fiber optic">Fiber optic</option>
                 <option value="No">No</option>
@@ -153,7 +154,7 @@ function App() {
             </label>
             <label>
               Online Security
-              <select className="selectbox1" name="OnlineSecurity" value={formData.OnlineSecurity} onChange={handleChange}>
+              <select className="selectbox2" name="OnlineSecurity" value={formData.OnlineSecurity} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -161,7 +162,7 @@ function App() {
             </label>
             <label>
               Online Backup
-              <select className="selectbox1" name="OnlineBackup" value={formData.OnlineBackup} onChange={handleChange}>
+              <select className="selectbox2" name="OnlineBackup" value={formData.OnlineBackup} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -172,7 +173,7 @@ function App() {
           <div className="row">
             <label>
               Device Protection
-              <select className="selectbox1" name="DeviceProtection" value={formData.DeviceProtection} onChange={handleChange}>
+              <select className="selectbox" name="DeviceProtection" value={formData.DeviceProtection} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
                 <option value="No internet service">No internet service</option>
@@ -211,7 +212,7 @@ function App() {
           <div className="row">
             <label>
               Contract
-              <select className="selectbox1" name="Contract" value={formData.Contract} onChange={handleChange}>
+              <select className="selectbox3" name="Contract" value={formData.Contract} onChange={handleChange}>
                 <option value="Month-to-month">Month-to-month</option>
                 <option value="One year">One year</option>
                 <option value="Two year">Two year</option>
@@ -219,14 +220,14 @@ function App() {
             </label>
             <label>
               Paperless Billing
-              <select className="selectbox1" name="PaperlessBilling" value={formData.PaperlessBilling} onChange={handleChange}>
+              <select className="selectbox3" name="PaperlessBilling" value={formData.PaperlessBilling} onChange={handleChange}>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
             </label>
             <label>
               Payment Method
-              <select className="selectbox1" name="PaymentMethod" value={formData.PaymentMethod} onChange={handleChange}>
+              <select className="selectbox3" name="PaymentMethod" value={formData.PaymentMethod} onChange={handleChange}>
                 <option value="Electronic check">Electronic check</option>
                 <option value="Mailed check">Mailed check</option>
                 <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
@@ -272,7 +273,7 @@ function App() {
           </button>
           <div className="linkbtn">
             <button type="button" className="buttonx">
-              <a href="http://localhost:8040/" target="_blank" rel="noopener noreferrer">
+              <a href="http://localhost:8501/" target="_blank" rel="noopener noreferrer">
                 Churn Analysis
               </a>
             </button>
@@ -302,8 +303,8 @@ function App() {
               <div className="metric-value">{prediction.churn_probability}%</div>
             </div>
             <div className="metric-card">
-              <div className="metric-value">₹{formData.MonthlyCharges}</div>
               <div className="metric-label">Monthly Charges</div>
+              <div className="metric-value">₹{formData.MonthlyCharges}</div>
             </div>
 
           </div>
